@@ -6,6 +6,7 @@ import FollowBar from "./FollowbarComponent/FollowBar"
 import Header from "./HomeComponent/Header"
 import Button from "./ButtonComponent/Button"
 import Modal from "./Modal/Modal"
+import Input from "./InputComponent/Input"
 
 
 export {
@@ -17,4 +18,5 @@ export {
     Header,
     Button,
     Modal,
+    Input,    
 }

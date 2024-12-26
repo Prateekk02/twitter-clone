@@ -1,5 +1,7 @@
+import Header from "@/components/HomeComponent/Header"
+
 export default function Home() {
   return <>
-    Hello
+    <Header showBackArrow label="Home"/>
   </>
 }

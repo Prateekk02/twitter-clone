@@ -4,6 +4,7 @@ import "./globals.css";
 import { Sidebar } from "@/components";
 import {FollowBar} from "@/components";
 import LoginModal from "@/components/Modal/LoginModal";
+import RegisterModal from "@/components/Modal/RegisterModal";
 
 
 const geistSans = Geist({
@@ -32,6 +33,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <LoginModal />
+        <RegisterModal/>
         <main className="min-h-screen bg-black">
           <div className="container h-full  mx-auto xl:px-30 max-w-6xl">
             <div className="grid grid-cols-4 min-h-screen">

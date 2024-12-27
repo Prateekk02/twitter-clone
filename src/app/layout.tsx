@@ -5,6 +5,7 @@ import { Sidebar } from "@/components";
 import {FollowBar} from "@/components";
 import LoginModal from "@/components/Modal/LoginModal";
 import RegisterModal from "@/components/Modal/RegisterModal";
+import { Providers } from "@/components";
 
 
 const geistSans = Geist({
@@ -41,7 +42,9 @@ export default function RootLayout({
                 <Sidebar />
                 </div>
               <div className="col-span-3 lg:col-span-2 border-x-[1px] bg-neutral-950 ">
+                <Providers>
                 {children}
+                </Providers>
               </div>  
 
               <FollowBar /> 

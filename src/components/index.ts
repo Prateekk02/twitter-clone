@@ -7,6 +7,7 @@ import Header from "./HomeComponent/Header"
 import Button from "./ButtonComponent/Button"
 import Modal from "./Modal/Modal"
 import Input from "./InputComponent/Input"
+import { Providers } from "./providers"
 
 
 export {
@@ -18,5 +19,6 @@ export {
     Header,
     Button,
     Modal,
-    Input,    
+    Input,  
+    Providers,  
 }

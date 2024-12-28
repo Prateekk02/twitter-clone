@@ -7,8 +7,7 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
     <SessionProvider>
       <Toaster />
-        {children}
-      
+        {children}      
     </SessionProvider>
   );
 };

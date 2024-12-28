@@ -1,6 +1,7 @@
-
+'use client'
 import { IconType } from "react-icons";
-import React from "react";
+import React, { useCallback } from "react";
+import { useRouter } from "next/navigation";
 
 
 interface SidebarItemProps {
@@ -15,10 +16,20 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
     href,
     icon: Icon, 
     onClick }) => {
-            
+        
+    const router = useRouter();    
+    const handleClick = useCallback(() => {
+        if(onClick){
+            onClick();
+        }
+
+        if(href){
+            router.push(href );
+        }
+    },[router,href, onClick]) 
     return <>
         
-            <div className="flex flex-row items-center ">
+            <button onClick={handleClick} className="flex flex-row items-center ">
                 <div className="relative rounded-full h-14 w-14 flex items-center justify-center p-4 hover:bg-slate-300 hover:bg-opacity-10 cursor-pointer lg:hidden transition">
                     <Icon size={28} color="white"/>
                 </div>
@@ -28,7 +39,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
                     {label}
                     </p>
                 </div>
-            </div>
+            </button>
         
        
     </>

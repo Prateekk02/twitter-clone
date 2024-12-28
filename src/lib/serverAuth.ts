@@ -1,6 +1,6 @@
 
 import { getServerSession } from "next-auth/next";
-import authOption from "./authOption";
+import authOption from "@/app/api/auth/[...nextauth]/options";
 import prisma from "./db";
 import { Session } from "next-auth";
 
@@ -8,7 +8,7 @@ import { Session } from "next-auth";
 const serverAuth = async () => {
   const session = await getServerSession(authOption) as Session; 
 
-  if (!session?.user?.email) {
+  if (!session || !session?.user.email) {
     throw new Error("Not signed in");
   }
 

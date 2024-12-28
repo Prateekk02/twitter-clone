@@ -32,6 +32,7 @@ const RegisterModal = () =>{
 
             toast.success("Account Created Successfully!!")
             signIn('credentials', {
+                redirect:false,
                 email, 
                 password 
             })

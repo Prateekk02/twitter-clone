@@ -1,14 +1,17 @@
 import bcrypt from 'bcrypt';
-import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import { NextAuthOptions } from 'next-auth'; 
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from '@/lib/db';
 
-const authOption =  NextAuth({
+
+const authOption:NextAuthOptions =  {
+    
     adapter:PrismaAdapter(prisma),
     providers:[
         CredentialsProvider({
-            name:'credentials',
+            id:'credentials',
+            name:'Credentials',
             credentials:{
                 email:{label:'email', type:'text'},
                 password:{label:'password', type:'password'}
@@ -36,7 +39,6 @@ const authOption =  NextAuth({
                     if(!isPasswordCorrect){
                         throw new Error('Invalid Password')
                     }
-
                     return user;
                 }catch(error){
                     console.error(error)
@@ -57,15 +59,47 @@ const authOption =  NextAuth({
         secret: process.env.NEXTAUTH_JWT_SECRET
     },
     secret: process.env.NEXTAUTH_SECRET,
+    pages:{
+        signIn:'/',
+        signOut:'/',
+         
+    },
     callbacks: {
+        async signIn({ user }) {
+            if (user) {
+                console.log(`User ${user.email} signed in successfully`);
+                return true; 
+            }
+            console.error('Sign-in failed: Invalid user or credentials');
+            return false;
+        },
         async redirect({ url, baseUrl }) {
-          
-          if (url.startsWith(baseUrl)) return url;
-          if (url.startsWith('/')) return new URL(url, baseUrl).toString();
-          return baseUrl;
+            
+            if (url.startsWith(baseUrl)) return url;
+            if (url.startsWith('/')) return new URL(url, baseUrl).toString();
+            return baseUrl;
+        },
+        async session({session, token}){
+            if (token) {
+                session.user = {
+                  ...session.user,
+                  id: token.id as string,
+                  email: token.email || '',
+                  name: token.name || '' 
+                };
+              }
+              return session;
+        },
+        async jwt({token , user}){
+            if(user){
+                token.id = user.id?.toString() || ''
+                token.email = user.email || ''
+                token.name = user.name || ''
+            }
+            return token
         }
     }
 
-})
+} 
 
 export  default authOption;

@@ -28,11 +28,7 @@ const LoginModal = () =>{
             })
 
             loginModal.onClose();
-            toast.success("Login Successful!")
-            
-            
-            
-
+            toast.success("Login Successful!") 
         }catch(error){
             console.log(error);
             toast.error("Login failed!")

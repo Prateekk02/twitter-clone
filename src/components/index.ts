@@ -8,6 +8,7 @@ import Button from "./ButtonComponent/Button"
 import Modal from "./Modal/Modal"
 import Input from "./InputComponent/Input"
 import { Providers } from "./providers"
+import Avatar from "./Avatar/Avatar" 
 
 
 export {
@@ -20,5 +21,6 @@ export {
     Button,
     Modal,
     Input,  
-    Providers,  
+    Providers, 
+    Avatar, 
 }

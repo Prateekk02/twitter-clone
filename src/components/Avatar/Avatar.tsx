@@ -16,9 +16,11 @@ const Avatar:React.FC<AvatarProps> = ({
     hasBorder
 }) =>{
     const router = useRouter();
+    
+    
     const {data: fetchedUser } = useUser(userId); 
 
-    const onClick = useCallback((event:React.MouseEvent<HTMLButtonElement> ) =>{
+    const onClick = useCallback((event:any) =>{
         event.stopPropagation();
         const url = `/users/${userId}`;
         router.push(url);
@@ -42,6 +44,7 @@ const Avatar:React.FC<AvatarProps> = ({
                     borderRadius: '100%'
                 }}
                 alt="Avatar"
+                onClick={onClick}
                 src={fetchedUser?.profileImage || '/images/placeholder.png'}
             />
         </div>

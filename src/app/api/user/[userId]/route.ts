@@ -1,28 +1,30 @@
 import prisma from "@/lib/db";
-import {  NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-const handler = async ({params} : {params: {userId: string}}) =>{
-    try{
 
-        const userId = params.userId;
 
-        if(!userId || typeof userId !== 'string'){
-            throw new Error("Invalid ID")  
+const handler = async ({ params }: { params: Promise<{ userId: string }> }) => {
+    const userId = (await params).userId; 
+
+    
+    try {
+        if (!userId || typeof userId !== 'string') {
+            throw new Error("Invalid ID");
         }
 
         const existingUser = await prisma.user.findUnique({
-            where:{
+            where: {
                 id: userId
             }
         });
 
-        if(!existingUser){
-            throw new Error("User does not exists!")
+        if (!existingUser) {
+            throw new Error("User does not exist!");
         }
 
         const followersCount = await prisma.user.count({
-            where:{
-                followIds:{
+            where: {
+                followIds: {
                     has: userId
                 }
             }
@@ -36,12 +38,11 @@ const handler = async ({params} : {params: {userId: string}}) =>{
             {
                 status: 200
             }
-        )
+        );
+    } catch (error) {
+        console.log(error);
+        return NextResponse.json({ error: error }, { status: 400 });
     }
-    catch(error){
-        console.log(error)
-        return NextResponse.json({error: error}, {status: 400});
-    }
-}
+};
 
-export {handler as GET};
+export { handler as GET };

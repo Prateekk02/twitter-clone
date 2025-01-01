@@ -9,9 +9,13 @@ import Modal from "./Modal/Modal"
 import Input from "./InputComponent/Input"
 import { Providers } from "./providers"
 import Avatar from "./Avatar/Avatar" 
+import UserId from "./Users/UserId"
+import UserProfileSkeleton from "./Skeletons/UserProfileSkeleton"
+import { UserHero } from "./Users/UserHero"
+import { UserBio } from "./Users/UserBio"
 
 
-export {
+export  {
     Sidebar,
     SidebarLogo,
     SidebarItem,
@@ -23,4 +27,8 @@ export {
     Input,  
     Providers, 
     Avatar, 
+    UserId,
+    UserProfileSkeleton,
+    UserHero,
+    UserBio,
 }

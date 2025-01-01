@@ -1,12 +1,11 @@
 'use client'
-
 import useUsers from "@/hooks/useUsers";
 import Avatar from "../Avatar/Avatar";
 
 
 
 const FollowBar = () =>{
-    const {data: users = []} =useUsers();
+    const {data: users = []} = useUsers();
 
     if(users.length === 0){
         return <div className="text-gray-500 px-6">No users to follow at the moment.</div>;
